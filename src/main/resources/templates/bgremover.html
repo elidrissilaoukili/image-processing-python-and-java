@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Image Processing</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../static/js/tailwindcss.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<div class="w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg flex">
+    <!-- Buttons Section -->
+    <!--  <div class="w-1/3 space-y-4 p-4">
+          <h1 class="text-2xl font-semibold text-gray-900 text-center">Image Processing</h1>
+          <input type="file" id="fileInput" name="file" required
+                 class="block w-full border border-gray-300 rounded-md p-2">
+          <button onclick="processImage('/remove-background-v1')"
+                  class="w-full bg-red-500 text-white py-2 rounded-md shadow-md hover:bg-red-600 transition">
+              Remove Background V1
+          </button>
+          <button onclick="processImage('/remove-background-v2')"
+                  class="w-full bg-blue-500 text-white py-2 rounded-md shadow-md hover:bg-blue-600 transition">
+              Remove Background V2
+          </button>
+          <button onclick="processImage('/image-enhancer-v1')"
+                  class="w-full bg-green-500 text-white py-2 rounded-md shadow-md hover:bg-green-600 transition">
+              Enhance Image
+          </button>
+          <button onclick="processImage('/invert-image-v1')"
+                  class="w-full bg-yellow-500 text-white py-2 rounded-md shadow-md hover:bg-yellow-600 transition">
+              Invert Image
+          </button>
+          <button onclick="processImage('/pyramidal-filter')"
+                  class="w-full bg-orange-500 text-white py-2 rounded-md shadow-md hover:bg-orange-600 transition">
+              Pyramidal Filter
+          </button>
+          <button onclick="processImage('/laplacian-filter')"
+                  class="w-full bg-blue-600 text-white py-2 rounded-md shadow-md hover:bg-blue-500 transition">
+              Laplacian Filter
+          </button>
+          <button onclick="processImage('/makeup-filter')"
+                  class="w-full bg-blue-600 text-white py-2 rounded-md shadow-md hover:bg-blue-500 transition">
+              Make up Filter
+          </button>
+          <button onclick="processImage('/scale-image-size')"
+                  class="w-full bg-blue-600 text-white py-2 rounded-md shadow-md hover:bg-blue-500 transition">
+              Scale Image Size
+          </button>
+      </div>
+  -->
+
+
+    <div class="w-1/3 space-y-4 p-4">
+        <h1 class="text-2xl font-semibold text-gray-900 text-center">Image Processing</h1>
+        <input type="file" id="fileInput" name="file" required
+               class="block w-full border border-gray-300 rounded-md p-2">
+
+        <select id="imageProcessingSelect" onchange="handleSelectChange(event)"
+                class="w-full border border-gray-300 rounded-md p-2">
+            <option value="" disabled selected>Select Image Processing</option>
+            <option value="/remove-background-v1">Remove Background V1</option>
+            <option value="/remove-background-v2">Remove Background V2</option>
+            <option value="/image-enhancer-v1">Enhance Image</option>
+            <option value="/invert-image-v1">Invert Image</option>
+            <option value="/pyramidal-filter">Pyramidal Filter</option>
+            <option value="/laplacian-filter">Laplacian Filter</option>
+            <option value="/makeup-filter">Make up Filter</option>
+            <option value="/scale-image-size">Scale Image Size</option>
+            <option value="/apply-additive-shift">apply additive shift</option>
+            <option value="/apply-contrast">apply contrast</option>
+            <option value="/apply-gaussian-noise">apply gaussian noise</option>
+            <option value="/apply-inversion">apply inversion</option>
+            <option value="/apply-multiplicative-scaling">apply multiplicative scaling</option>
+            <option value="/add-salt-pepper-noise">add salt pepper noise</option>
+
+            <option value="/mean-filter">mean filter</option>
+            <option value="/gaussian-filter">gaussian filter</option>
+            <option value="/pyramidal-filter-v2">pyramidal filter v2</option>
+            <option value="/conical-filter">conical filter</option>
+            <option value="/median-filter">median filter</option>
+            
+            <option value="/gradient-edge-detection">gradient edge detection</option>
+            <option value="/sobel-edge-detection">sobel edge detection</option>
+            <option value="/prewitt-edge-detection">prewitt edge detection</option>
+            <option value="/roberts-edge-detection">roberts edge detection</option>
+            <option value="/laplacian-edge-detection">laplacian edge detection</option>
+
+        </select>
+    </div>
+
+    <script>
+        function handleSelectChange(event) {
+            const selectedOption = event.target.value;
+            if (selectedOption) {
+                processImage(selectedOption);
+            }
+        }
+    </script>
+
+
+    <!-- Image Display Section -->
+    <div class="w-2/3 flex flex-col items-center justify-center p-4">
+        <div id="progressContainer" class="hidden w-full">
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div id="progressBar" class="bg-blue-500 h-2.5 rounded-full" style="width: 0%;"></div>
+            </div>
+        </div>
+        <div id="result" class="hidden text-center mt-4">
+            <p class="text-green-600">Processing complete!</p>
+            <img id="outputImage" src="" alt="Processed Image" class="mt-2 max-w-full rounded-md shadow">
+            <a id="downloadLink" href="" download class="block mt-2 text-blue-500 underline">Download Image</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function processImage(endpoint) {
+        let formData = new FormData();
+        let fileInput = document.getElementById("fileInput").files[0];
+        let progressBar = document.getElementById("progressBar");
+        let progressContainer = document.getElementById("progressContainer");
+
+        if (!fileInput) {
+            alert("Please select a file first.");
+            return;
+        }
+
+        formData.append("file", fileInput);
+        progressContainer.classList.remove("hidden");
+        progressBar.style.width = "0%";
+
+        let progressInterval = setInterval(() => {
+            let width = parseInt(progressBar.style.width);
+            if (width < 90) {
+                progressBar.style.width = (width + 10) + "%";
+            }
+        }, 500);
+
+        fetch(endpoint, {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.text()) // Expecting text response (image path)
+            .then(imagePath => {
+                clearInterval(progressInterval);
+                progressBar.style.width = "100%";
+                setTimeout(() => {
+                    progressContainer.classList.add("hidden");
+                }, 500);
+
+                if (imagePath.startsWith("/outputs/")) { // Ensure correct response
+                    let fullPath = window.location.origin + imagePath;
+                    document.getElementById("outputImage").src = fullPath;
+                    document.getElementById("downloadLink").href = fullPath;
+                    document.getElementById("result").classList.remove("hidden");
+                } else {
+                    alert("Error processing image: " + imagePath);
+                }
+            })
+            .catch(error => {
+                clearInterval(progressInterval);
+                progressContainer.classList.add("hidden");
+                console.error("Error:", error);
+            });
+    }
+</script>
+</body>
+</html>
