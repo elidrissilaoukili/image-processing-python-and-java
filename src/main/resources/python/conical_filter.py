@@ -1,6 +1,6 @@
+import sys
 import cv2
 import numpy as np
-import sys
 
 def conical_filter(input_path, output_path):
     image = cv2.imread(input_path, cv2.IMREAD_GRAYSCALE)
@@ -12,7 +12,6 @@ def conical_filter(input_path, output_path):
                                 [0, 2, 2, 2, 0], [0, 0, 1, 0, 0]])
     filtered_image = cv2.filter2D(image, -1, kernel)
     cv2.imwrite(output_path, filtered_image)
-
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

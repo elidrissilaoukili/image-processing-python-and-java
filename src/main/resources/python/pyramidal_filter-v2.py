@@ -15,10 +15,10 @@ def pyramidal_filter(input_path, output_path):
 
 
 if __name__ == "__main__":
+    import sys
     if len(sys.argv) != 3:
-        print("Usage: python add_noise.py <input_path> <output_path>")
-        sys.exit(1)
-
-    input_path = sys.argv[1]
-    output_path = sys.argv[2]
-    pyramidal_filter(input_path, output_path)
+        print("Usage: python script.py <input_image> <output_image>")
+    else:
+        image_path = sys.argv[1]
+        output_path = sys.argv[2]
+        pyramidal_filter(image_path, output_path)

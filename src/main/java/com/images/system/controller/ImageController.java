@@ -1,7 +1,9 @@
 package com.images.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -92,6 +94,16 @@ public class ImageController {
                 imageProcessingService.robertsEdgeDetection(uploadedFilePath, outputPath);
             } else if ("laplacianEdgeDetection".equals(version)) {
                 imageProcessingService.laplacianEdgeDetection(uploadedFilePath, outputPath);
+            } else if ("lowPassFilter".equals(version)) {
+                imageProcessingService.lowPassFilter(uploadedFilePath, outputPath);
+            } else if ("butterworthLowPassFilter".equals(version)) {
+                imageProcessingService.butterworthLowPassFilter(uploadedFilePath, outputPath);
+            } else if ("highPassFilter".equals(version)) {
+                imageProcessingService.highPassFilter(uploadedFilePath, outputPath);
+            } else if ("butterworthHighPassFilter".equals(version)) {
+                imageProcessingService.butterworthHighPassFilter(uploadedFilePath, outputPath);
+            } else if ("cartoonizeImage".equals(version)) {
+                imageProcessingService.cartoonizeImage(uploadedFilePath, outputPath);
             }
 
             // Return output image path
@@ -101,123 +113,148 @@ public class ImageController {
         }
     }
 
-    @PostMapping("/remove-background-v1")
+    @PostMapping("/remove_background_v1")
     public String removeBackgroundV1(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "removeBackgroundV1");
     }
 
-    @PostMapping("/remove-background-v2")
+    @PostMapping("/remove_background_v2")
     public String removeBackgroundV2(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "removeBackgroundV2");
     }
 
-    @PostMapping("/image-enhancer-v1")
+    @PostMapping("/image_enhancer_v1")
     public String imageEnhancerV1(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "imageEnhancerV1");
     }
 
-    @PostMapping("/invert-image-v1")
+    @PostMapping("/invert_image_v1")
     public String invertImageV1(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "invertImageV1");
     }
 
-    @PostMapping("/pyramidal-filter")
+    @PostMapping("/pyramidal_filter")
     public String pyramidalFilter(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "pyramidalFilter");
     }
 
-    @PostMapping("/laplacian-filter")
+    @PostMapping("/laplacian_filter")
     public String laplacianFilter(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "laplacianFilter");
     }
 
-    @PostMapping("/makeup-filter")
+    @PostMapping("/makeup_filter")
     public String makeupFilter(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "makeupFilter");
     }
 
-    @PostMapping("/scale-image-size")
+    @PostMapping("/scale_image_size")
     public String scaleImageSize(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "scaleImageSize");
     }
 
-    @PostMapping("/apply-additive-shift")
+    @PostMapping("/apply_additive_shift")
     public String applyAdditiveShift(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "applyAdditiveShift");
     }
 
-    @PostMapping("/apply-contrast")
+    @PostMapping("/apply_contrast")
     public String applyContrast(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "applyContrast");
     }
 
-    @PostMapping("/apply-gaussian-noise")
+    @PostMapping("/apply_gaussian_noise")
     public String applyGaussianNoise(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "applyGaussianNoise");
     }
 
-    @PostMapping("/apply-inversion")
+    @PostMapping("/apply_inversion")
     public String applyInversion(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "applyInversion");
     }
 
-    @PostMapping("/apply-multiplicative-scaling")
+    @PostMapping("/apply_multiplicative_scaling")
     public String applyMultiplicativeScaling(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "applyMultiplicativeScaling");
     }
 
-    @PostMapping("/add-salt-pepper-noise")
+    @PostMapping("/add_salt_pepper_noise")
     public String addSaltPepperNoise(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "addSaltPepperNoise");
     }
 
-    @PostMapping("/mean-filter")
+    @PostMapping("/mean_filter")
     public String meanFilter(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "meanFilter");
     }
 
-    @PostMapping("/gaussian-filter")
+    @PostMapping("/gaussian_filter")
     public String gaussianFilter(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "gaussianFilter");
     }
 
-    @PostMapping("/pyramidal-filter-v2")
+    @PostMapping("/pyramidal_filter_v2")
     public String pyramidalFilterV2(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "pyramidalFilterV2");
     }
 
-    @PostMapping("/conical-filter")
+    @PostMapping("/conical_filter")
     public String conicalFilter(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "conicalFilter");
     }
 
-    @PostMapping("/median-filter")
+    @PostMapping("/median_filter")
     public String medianFilter(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "medianFilter");
     }
 
-    @PostMapping("/gradient-edge-detection")
+    @PostMapping("/gradient_edge_detection")
     public String gradientEdgeDetection(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "gradientEdgeDetection");
     }
 
-    @PostMapping("/sobel-edge-detection")
+    @PostMapping("/sobel_edge_detection")
     public String sobelEdgeDetection(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "sobelEdgeDetection");
     }
 
-    @PostMapping("/prewitt-edge-detection")
+    @PostMapping("/prewitt_edge_detection")
     public String prewittEdgeDetection(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "prewittEdgeDetection");
     }
 
-    @PostMapping("/roberts-edge-detection")
+    @PostMapping("/roberts_edge_detection")
     public String robertsEdgeDetection(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "robertsEdgeDetection");
     }
 
-    @PostMapping("/laplacian-edge-detection")
+    @PostMapping("/laplacian_edge_detection")
     public String laplacianEdgeDetection(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "laplacianEdgeDetection");
+    }
+
+    @PostMapping("/low_pass_filter")
+    public String lowPassFilter(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "lowPassFilter");
+    }
+
+    @PostMapping("/butterworth_low_pass_filter")
+    public String butterworthLowPassFilter(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "butterworthLowPassFilter");
+    }
+
+    @PostMapping("/high_pass_filter")
+    public String highPassFilter(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "highPassFilter");
+    }
+
+    @PostMapping("/butterworth_high_pass_filter")
+    public String butterworthHighPassFilter(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "butterworthHighPassFilter");
+    }
+
+    @PostMapping("/cartoonize_image")
+    public String cartoonizeImage(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "cartoonizeImage");
     }
 }

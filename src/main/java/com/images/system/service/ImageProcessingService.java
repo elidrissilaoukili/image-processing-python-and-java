@@ -134,4 +134,24 @@ public class ImageProcessingService {
     public void laplacianEdgeDetection(String imagePath, String outputPath) {
         executePythonScript("python/median_filter.py", imagePath, outputPath);
     }
+
+    public void lowPassFilter(String imagePath, String outputPath) {
+        executePythonScript("python/low_pass_filter.py", imagePath, outputPath);
+    }
+
+    public void butterworthLowPassFilter(String imagePath, String outputPath) {
+        executePythonScript("python/butterworth_low_pass_filter.py", imagePath, outputPath);
+    }
+
+    public void highPassFilter(String imagePath, String outputPath) {
+        executePythonScript("python/high_pass_filter.py", imagePath, outputPath);
+    }
+
+    public void butterworthHighPassFilter(String imagePath, String outputPath) {
+        executePythonScript("python/butterworth_high_pass_filter.py", imagePath, outputPath);
+    }
+
+    public void cartoonizeImage(String imagePath, String outputPath) {
+        executePythonScript("python/cartoonize_image.py", imagePath, outputPath);
+    }
 }
