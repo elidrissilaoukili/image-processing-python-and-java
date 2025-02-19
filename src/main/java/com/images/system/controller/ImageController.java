@@ -1,9 +1,7 @@
 package com.images.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -104,10 +102,16 @@ public class ImageController {
                 imageProcessingService.butterworthHighPassFilter(uploadedFilePath, outputPath);
             } else if ("cartoonizeImage".equals(version)) {
                 imageProcessingService.cartoonizeImage(uploadedFilePath, outputPath);
+            } else if ("detectHarrisCorners".equals(version)) {
+                imageProcessingService.detectHarrisCorners(uploadedFilePath, outputPath);
+            } else if ("susanCornerDetection".equals(version)) {
+                imageProcessingService.susanCornerDetection(uploadedFilePath, outputPath);
             }
 
+            
             // Return output image path
             return "/outputs/" + outputFileName;
+
         } catch (IOException e) {
             return "Error processing file: " + e.getMessage();
         }
@@ -257,4 +261,16 @@ public class ImageController {
     public String cartoonizeImage(@RequestParam("file") MultipartFile file) {
         return imageControllerHelper(file, "cartoonizeImage");
     }
+
+    @PostMapping("/detect_harris_corners")
+    public String detectHarrisCorners(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "detectHarrisCorners");
+    }
+
+    @PostMapping("/susan_corner_detection")
+    public String susanCornerDetection(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "susanCornerDetection");
+    }
+
+    
 }

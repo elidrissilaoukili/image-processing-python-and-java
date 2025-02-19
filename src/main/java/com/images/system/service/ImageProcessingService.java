@@ -104,7 +104,7 @@ public class ImageProcessingService {
     }
 
     public void pyramidalFilterV2(String imagePath, String outputPath) {
-        executePythonScript("python/pyramidal_filterV2.py", imagePath, outputPath);
+        executePythonScript("python/pyramidal_filter-v2.py", imagePath, outputPath);
     }
 
     public void conicalFilter(String imagePath, String outputPath) {
@@ -154,4 +154,14 @@ public class ImageProcessingService {
     public void cartoonizeImage(String imagePath, String outputPath) {
         executePythonScript("python/cartoonize_image.py", imagePath, outputPath);
     }
+
+    public void detectHarrisCorners(String imagePath, String outputPath) {
+        executePythonScript("python/detect_harris_corners.py", imagePath, outputPath);
+    }
+
+    
+    public void susanCornerDetection(String imagePath, String outputPath) {
+        executePythonScript("python/susan_corner_detection.py", imagePath, outputPath);
+    }
+
 }
