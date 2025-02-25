@@ -106,9 +106,25 @@ public class ImageController {
                 imageProcessingService.detectHarrisCorners(uploadedFilePath, outputPath);
             } else if ("susanCornerDetection".equals(version)) {
                 imageProcessingService.susanCornerDetection(uploadedFilePath, outputPath);
+            } else if ("applyErosion".equals(version)) {
+                imageProcessingService.applyErosion(uploadedFilePath, outputPath);
+            } else if ("applyDilation".equals(version)) {
+                imageProcessingService.applyDilation(uploadedFilePath, outputPath);
+            } else if ("applyOpening".equals(version)) {
+                imageProcessingService.applyOpening(uploadedFilePath, outputPath);
+            } else if ("applyClosing".equals(version)) {
+                imageProcessingService.applyClosing(uploadedFilePath, outputPath);
+            } else if ("apply_internal_gradient".equals(version)) {
+                imageProcessingService.apply_internal_gradient(uploadedFilePath, outputPath);
+            } else if ("apply_external_gradient".equals(version)) {
+                imageProcessingService.apply_external_gradient(uploadedFilePath, outputPath);
+            } else if ("apply_morphological_gradient".equals(version)) {
+                imageProcessingService.apply_morphological_gradient(uploadedFilePath, outputPath);
+            } else if ("apply_white_tophat".equals(version)) {
+                imageProcessingService.apply_white_tophat(uploadedFilePath, outputPath);
+            } else if ("apply_black_tophat".equals(version)) {
+                imageProcessingService.apply_black_tophat(uploadedFilePath, outputPath);
             }
-
-            
             // Return output image path
             return "/outputs/" + outputFileName;
 
@@ -272,5 +288,48 @@ public class ImageController {
         return imageControllerHelper(file, "susanCornerDetection");
     }
 
-    
+    @PostMapping("/apply_erosion")
+    public String applyErosion(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "applyErosion");
+    }
+
+    @PostMapping("/apply_dilation")
+    public String applyDilation(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "applyDilation");
+    }
+
+    @PostMapping("/apply_opening")
+    public String applyOpening(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "applyOpening");
+    }
+
+    @PostMapping("/apply_closing")
+    public String applyClosing(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "applyClosing");
+    }
+
+    @PostMapping("/apply_internal_gradient")
+    public String apply_internal_gradient(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "apply_internal_gradient");
+    }
+
+    @PostMapping("/apply_external_gradient")
+    public String apply_external_gradient(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "apply_external_gradient");
+    }
+
+    @PostMapping("/apply_morphological_gradient")
+    public String apply_morphological_gradient(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "apply_morphological_gradient");
+    }
+
+    @PostMapping("/apply_white_tophat")
+    public String apply_white_tophat(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "apply_white_tophat");
+    }
+
+    @PostMapping("/apply_black_tophat")
+    public String apply_black_tophat(@RequestParam("file") MultipartFile file) {
+        return imageControllerHelper(file, "apply_black_tophat");
+    }
 }

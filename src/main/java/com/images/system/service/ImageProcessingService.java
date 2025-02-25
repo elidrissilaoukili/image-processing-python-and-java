@@ -159,9 +159,43 @@ public class ImageProcessingService {
         executePythonScript("python/detect_harris_corners.py", imagePath, outputPath);
     }
 
-    
     public void susanCornerDetection(String imagePath, String outputPath) {
         executePythonScript("python/susan_corner_detection.py", imagePath, outputPath);
     }
 
+    public void applyErosion(String imagePath, String outputPath) {
+        executePythonScript("python/apply_erosion.py", imagePath, outputPath);
+    }
+
+    public void applyDilation(String imagePath, String outputPath) {
+        executePythonScript("python/apply_dilation.py", imagePath, outputPath);
+    }
+
+    public void applyOpening(String imagePath, String outputPath) {
+        executePythonScript("python/apply_opening.py", imagePath, outputPath);
+    }
+
+    public void applyClosing(String imagePath, String outputPath) {
+        executePythonScript("python/apply_closing.py", imagePath, outputPath);
+    }
+
+    public void apply_internal_gradient(String imagePath, String outputPath) {
+        executePythonScript("python/apply_internal_gradient.py", imagePath, outputPath);
+    }
+
+    public void apply_external_gradient(String imagePath, String outputPath) {
+        executePythonScript("python/apply_external_gradient.py", imagePath, outputPath);
+    }
+
+    public void apply_morphological_gradient(String imagePath, String outputPath) {
+        executePythonScript("python/apply_morphological_gradient.py", imagePath, outputPath);
+    }
+
+    public void apply_white_tophat(String imagePath, String outputPath) {
+        executePythonScript("python/apply_white_tophat.py", imagePath, outputPath);
+    }
+
+    public void apply_black_tophat(String imagePath, String outputPath) {
+        executePythonScript("python/apply_black_tophat.py", imagePath, outputPath);
+    }
 }
